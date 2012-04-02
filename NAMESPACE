@@ -1,0 +1,10 @@
+import(svDialogs, svGUI, tcltk)
+
+#export()
+
+S3method(dlgDir, tcltkGUI)
+S3method(dlgInput, tcltkGUI)
+S3method(dlgList, tcltkGUI)
+S3method(dlgMessage, tcltkGUI)
+S3method(dlgOpen, tcltkGUI)
+S3method(dlgSave, tcltkGUI)

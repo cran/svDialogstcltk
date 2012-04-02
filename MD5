@@ -1,0 +1,15 @@
+578d64cd6fc5bef436a2c16aebe0ab12 *DESCRIPTION
+a3e5780aa3acf21372c9c2d3360ff489 *NAMESPACE
+10ea14fbb502867893de971022f02d6b *NEWS
+edbfc89be4270dbeae3c847f60886ee5 *R/dlgDir.tcltkGUI.R
+d1efd7a6fb27fabe3315812290ba557d *R/dlgInput.tcltkGUI.R
+117d051fc7ae82f64cfa77ea4f6783f0 *R/dlgList.tcltkGUI.R
+fe3420241b19594a8535289dbe32954f *R/dlgMessage.tcltkGUI.R
+1e4ef82919d84059110f03904e7a729b *R/dlgOpen.tcltkGUI.R
+8eeee7c45d3dc013b145ba916c4d593c *R/dlgSave.tcltkGUI.R
+959c20e214ad74adf49028aea815d682 *R/svDialogstcltk-Internal.R
+2dcbdb122cbd761f9604f6a1f29855ae *TODO
+9ad96b84f192f7f1987dd3b5d6c9270e *inst/CITATION
+393a5ca445f6965873eca0259a17f833 *inst/LICENSE
+551b804d14d1ade88fe0546b438dc41f *inst/NEWS.Rd
+2b5ebafd8e008ba78e43493c235b48dd *man/svDialogstcltk-package.Rd
