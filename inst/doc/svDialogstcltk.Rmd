@@ -1,0 +1,80 @@
+---
+title: "SciViews svDialogs, Tcl/Tk version"
+author: "Philippe Grosjean (phgrosjean@sciviews.org)"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{SciViews svDialogs, Tcl/Tk version}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This package demonstrate how to reimplement the {svDialogs} functions using different widgets and GUI. Only a couple of dialog boxes are currently implementation, just for the sake of that demonstration.
+
+**You should execute the code in this vignette in an R interactive session that supports Tcl/Tk display in order to get the various dialog boxes!**
+
+```{r}
+# This must be TRUE in order to see the Tcl/Tk dialog boxes
+capabilities("tcltk")
+```
+
+When {svDialogs} is loaded, it creates a default `.GUI` object using `nativeGUI` (native dialog boxes) in priority, followed by textual versions at the command line as fallback alternative (`textCLI`).
+
+```{r}
+library(svGUI)
+library(svDialogs)
+# The default GUI
+.GUI
+def_widgets <- gui_widgets(.GUI)
+def_widgets
+```
+
+This means that {svDialogs} will use a native box (or a text version, depending from where you run the code in R) for this code:
+
+```{r, eval=FALSE}
+dlg_message("Hello world!")$res
+```
+
+To use the Tcl/Tk dialog boxes implemented in {svDialogstcltk} in the default GUI without changing anything in the subsequent code that uses the dialog boxes, you just have to load this package before use:
+
+```{r}
+library(svDialogstcltk)
+gui_widgets(.GUI)
+```
+
+A new item, `tcltkGUI`, is inserted at the first position of the `gui_widgets()` specification in the `.GUI` object. The consequence is the use of the corresponding methods, if they are defined for the `dlg_xxx()` functions. For instance, you should now get a Tcl/Tk version of a message box with the following code:
+
+```{r, eval=FALSE}
+dlg_message("Hello world!")$res
+```
+
+# Using Tcl/Tk dialog boxes in a custom GUI
+
+The {svDialogs} logic allows to implement simultaneously various GUIs, with different features. For instance, you may be interested to implement a Tcl/Tk-only GUI side-by-side with native dialog boxes that are used for the rest of the R process. In this case, you must manually insert the GUI you want to use in the GUI object.
+
+```{r}
+# Restore nativeGUI + textual fallback for the default .GUI
+gui_change('.GUI', widgets = def_widgets, reset = TRUE)
+
+# Add a new GUI called myGUI
+gui_add("myGUI")
+myGUI
+# Switch to Tcl/Tk version of the dialog boxes exclusively for myGUI
+gui_change('myGUI', widgets = "tcltkGUI", reset = TRUE)
+```
+
+Now, with this configuration, all code that use the default GUI will display native dialog boxes. However, code using `myGUI` will always display the Tcl/Tk version of the dialog boxes.
+
+```{r}
+# A message box in the default GUI (native)
+dlg_message("Hello from the default GUI!")$res
+
+# A message box in myGUI (Tcl/Tk version)
+dlg_message("Hello from myGUI (Tcl/Tk)!", gui = myGUI)$res
+```
